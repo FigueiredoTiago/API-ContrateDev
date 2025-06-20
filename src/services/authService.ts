@@ -1,6 +1,6 @@
-import axios from "axios";
+import { prisma } from "../prismaSetup";
 
-import prisma from "../../prisma/prismaConfig";
+import axios from "axios";
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
