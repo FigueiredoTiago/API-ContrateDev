@@ -9,16 +9,33 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  githubId  Int      @unique
+  id        Int        @id @default(autoincrement())
+  githubId  Int        @unique
   login     String
   name      String?
-  email     String?  @unique
+  email     String?    @unique
   avatarUrl String?
   bio       String?
   location  String?
   website   String?
   githubUrl String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  profileCv ProfileCv?
+}
+
+model ProfileCv {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+
+  name        String
+  email       String   @unique
+  githubUrl   String
+  linkedinUrl String
+  websiteUrl  String
+  city        String
+  phone       String
+  about       String
+  stacks      String[]
 }
