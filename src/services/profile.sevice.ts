@@ -1,4 +1,4 @@
-import { prisma } from "../prismaSetup";
+import prisma from "../../prisma/prismaClient";
 
 export const createProfileService = async (data: any): Promise<any> => {
   const userId = data.userId;

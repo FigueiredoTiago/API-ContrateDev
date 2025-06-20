@@ -1,4 +1,4 @@
-import { prisma } from "../prismaSetup";
+import prisma from "../../prisma/prismaClient";
 
 import axios from "axios";
 
