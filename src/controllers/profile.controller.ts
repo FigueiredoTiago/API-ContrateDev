@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { createProfileService } from "../services/profile.sevice";
 
 interface ProfileData {
+  userId: number;
   name: string;
   email: string;
   githubUrl: string;
@@ -19,10 +20,33 @@ export const createProfile = async (
 ): Promise<any> => {
   // const userId = req.userId; // vindo do middleware de autenticação
 
+  const userId = 12345; // Placeholder for userId, replace with actual logic
+  const data = req.body;
+
   try {
-    const data = req.body;
+    if (!userId) {
+      res.status(401).json({
+        message: "user not authenticated!",
+      });
+      return;
+    }
+
+    if (
+      !data.name ||
+      !data.email ||
+      !data.githubUrl ||
+      !data.linkedinUrl ||
+      !data.websiteUrl ||
+      !data.city ||
+      !data.phone ||
+      !data.about ||
+      !data.stacks
+    ) {
+      res.status(400).json({ message: "All fields are required!!!" });
+    }
 
     const profileData: ProfileData = {
+      userId: userId,
       name: data.name,
       email: data.email,
       githubUrl: data.githubUrl,
@@ -37,10 +61,9 @@ export const createProfile = async (
     const profile = await createProfileService(profileData);
     res.status(201).json({ message: "Profile Saved Successfully", profile });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Error creating Profile...",
     });
   }
 };
-
-
