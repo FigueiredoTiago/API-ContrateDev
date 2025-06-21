@@ -33,7 +33,7 @@ model User {
 model ProfileCv {
   id     Int  @id @default(autoincrement())
   userId Int  @unique
-  user   User @relation(fields: [userId], references: [githubId])
+  user   User @relation(fields: [userId], references: [id])
 
   name        String
   email       String   @unique
