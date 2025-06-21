@@ -1,5 +1,4 @@
 import prisma from "../../prisma/prismaClient";
-
 import axios from "axios";
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
