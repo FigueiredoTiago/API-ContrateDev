@@ -19,3 +19,15 @@ export const createProfileService = async (data: any): Promise<any> => {
     });
   }
 };
+
+//service para buscar todos os perfis cadastrados e exibir por ordem aleatoria random
+
+export const getAllRandomProfileService = async (): Promise<any> => {
+  const profiles = await prisma.profileCv.findMany();
+
+  //embaralhar perfis para ordem aleatoria
+
+  const randomProfiles = profiles.sort(() => Math.random() - 0.5);
+
+  return randomProfiles;
+};
