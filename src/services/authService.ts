@@ -38,14 +38,12 @@ export const githubAuthService = async (code: string) => {
       login: githubData.login,
       name: githubData.name,
       avatarUrl: githubData.avatar_url,
-      email: githubData.email,
     },
     create: {
       githubId: githubData.id,
       login: githubData.login,
       name: githubData.name,
       avatarUrl: githubData.avatar_url,
-      email: githubData.email,
     },
   });
 

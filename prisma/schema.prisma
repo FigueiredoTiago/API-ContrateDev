@@ -19,12 +19,7 @@ model User {
   githubId  Int        @unique
   login     String
   name      String?
-  email     String?    @unique
   avatarUrl String?
-  bio       String?
-  location  String?
-  website   String?
-  githubUrl String?
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   profileCv ProfileCv?
