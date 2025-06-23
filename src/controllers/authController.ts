@@ -11,7 +11,7 @@ export const githubAuthController = async (
     res.status(400).json({ error: "Código de autenticação não enviado." });
     return;
   }
-
+//criar um jWT para enviar para o FrontEnd
   try {
     const user = await githubAuthService(code);
     res.status(200).json(user);

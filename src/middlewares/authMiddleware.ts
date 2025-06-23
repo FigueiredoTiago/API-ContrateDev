@@ -22,7 +22,9 @@ export const authMiddleware = async (
     return;
   }
 
+  //altera a logica para receber um jwt e decodificar o id do usuário
   const userId = Number(userIdHeader);
+  
 
   if (isNaN(userId)) {
     res.status(400).json({ error: "ID do usuário inválido." });
@@ -39,7 +41,7 @@ export const authMiddleware = async (
 
     req.userId = user.id;
 
-    next();
+    next(); 
   } catch (error) {
     console.error("Erro no middleware de autenticação:", error);
     res.status(500).json({ error: "Erro interno de autenticação." });
