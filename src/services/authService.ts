@@ -1,5 +1,6 @@
 import prisma from "../../prisma/prismaClient";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
@@ -48,4 +49,11 @@ export const githubAuthService = async (code: string) => {
   });
 
   return user;
+};
+
+//service para gerar token jwt com id do usuario
+export const generateToken = (id: number) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET as string, {
+    expiresIn: "1d",
+  });
 };

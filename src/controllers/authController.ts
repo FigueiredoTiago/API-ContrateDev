@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { githubAuthService } from "../services/authService";
+import { githubAuthService, generateToken } from "../services/authService";
 
 export const githubAuthController = async (
   req: Request,
@@ -11,10 +11,16 @@ export const githubAuthController = async (
     res.status(400).json({ error: "Código de autenticação não enviado." });
     return;
   }
-//criar um jWT para enviar para o FrontEnd
+  //criar um jWT para enviar para o FrontEnd
   try {
     const user = await githubAuthService(code);
-    res.status(200).json(user);
+
+    const userId = user.id;
+
+    const token = generateToken(userId);
+
+    res.status(200).json({ message: "Logado com Sucesso!", token, user });
+
     return;
   } catch (error) {
     console.error("Erro na autenticação com GitHub:", error);
