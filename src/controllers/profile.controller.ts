@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   createProfileService,
   getAllRandomProfileService,
+  getProfileByIdService,
 } from "../services/profile.sevice";
 
 export const createProfile = async (
@@ -79,6 +80,31 @@ export const getAllRandomProfile = async (
     }
     return res.status(200).json(profiles);
   } catch (error) {
-    res.send(500).json({ message: "Error ao Buscar perfis." });
+    res.status(500).json({ message: "Error ao Buscar perfis." });
+  }
+};
+
+//controle para buscar um perfil pelo id do perfil
+
+export const getProfileById = async (req: Request, res: Response) => {
+  const profileId = req.params.id;
+
+  if (!profileId || isNaN(Number(profileId))) {
+    res.status(400).json({ error: "ID inválido!" });
+    return;
+  }
+
+  try {
+    const profile = await getProfileByIdService(Number(profileId));
+
+    if (!profile) {
+      res.status(404).json({ message: "Perfil não encontrado." });
+      return;
+    }
+
+    res.status(200).json(profile);
+  } catch (error) {
+    res.status(500).json({ message: "Error ao Buscar perfil." });
+    return;
   }
 };
