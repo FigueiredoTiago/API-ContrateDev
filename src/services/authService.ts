@@ -50,7 +50,7 @@ export const githubAuthService = async (code: string) => {
 
   return user;
 };
-
+ 
 //service para gerar token jwt com id do usuario
 export const generateToken = (id: string) => {
   return jwt.sign({ id }, process.env.JWT_SECRET as string, {

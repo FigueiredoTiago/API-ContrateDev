@@ -95,7 +95,7 @@ export const getAllRandomProfile = async (
 export const getProfileById = async (req: Request, res: Response) => {
   const profileId = req.params.id;
 
-  if (!profileId || isNaN(Number(profileId))) {
+  if (!profileId) {
     res.status(400).json({ error: "ID inválido!" });
     return;
   }
