@@ -4,7 +4,7 @@
 
 ## 🧠 Sobre o projeto
 
-Este repositório representa o **Back-End** da aplicação **Contrate.dev** — uma plataforma 100% **gratuita** e **open-source** que conecta **desenvolvedores** a **oportunidades reais** de trabalho!
+Este repositório representa o **Back-End** da aplicação **Contrate.dev** — uma plataforma 100% **gratuita** e **open-source** que conecta **Pessoas** a **desenvolvedores** que buscam **oportunidades reais** de trabalho!
 
 A API foi construída com foco em **performance**, **segurança** e **escalabilidade**, utilizando autenticação via **GitHub OAuth**, banco de dados relacional, e práticas modernas de desenvolvimento com **TypeScript**, **Docker**, e **CI/CD com GitHub Actions**.
 
