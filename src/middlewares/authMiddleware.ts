@@ -19,6 +19,8 @@ export const authMiddleware = async (
   try {
     const authHeader = req.headers.authorization;
 
+    console.log("Authorization header:", authHeader);
+
     if (!authHeader) {
       res.status(401).send("Token não informado.");
       return;
@@ -50,8 +52,9 @@ export const authMiddleware = async (
 
     next();
   } catch (error) {
-    console.error("Erro no middleware de autenticação:", error);
-    res.status(500).json({ error: "Erro interno de autenticação." });
+    res
+      .status(401)
+      .send({ message: "Token inválido ou expirado.", error: error });
     return;
   }
 };

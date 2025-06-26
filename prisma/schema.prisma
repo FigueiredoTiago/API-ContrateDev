@@ -30,6 +30,7 @@ model ProfileCv {
   user   User   @relation(fields: [userId], references: [id])
 
   name        String
+  avatarUrl   String
   email       String   @unique
   githubUrl   String
   linkedinUrl String
@@ -37,5 +38,6 @@ model ProfileCv {
   city        String
   phone       String
   about       String
+  mainStack   String
   stacks      String[]
 }

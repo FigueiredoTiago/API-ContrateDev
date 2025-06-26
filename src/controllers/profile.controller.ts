@@ -17,6 +17,7 @@ export const createProfile = async (
 
   const {
     name,
+    avatarUrl,
     email,
     githubUrl,
     linkedinUrl,
@@ -24,11 +25,13 @@ export const createProfile = async (
     city,
     phone,
     about,
+    mainStack,
     stacks,
   } = req.body;
 
   if (
     !name ||
+    !avatarUrl ||
     !email ||
     !githubUrl ||
     !linkedinUrl ||
@@ -36,6 +39,7 @@ export const createProfile = async (
     !city ||
     !phone ||
     !about ||
+    !mainStack ||
     !stacks
   ) {
     return res
@@ -46,6 +50,7 @@ export const createProfile = async (
   const profileData = {
     userId: userId, // usa o ID interno
     name,
+    avatarUrl,
     email,
     githubUrl,
     linkedinUrl,
@@ -53,6 +58,7 @@ export const createProfile = async (
     city,
     phone,
     about,
+    mainStack,
     stacks,
   };
 
