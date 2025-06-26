@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 declare global {
   namespace Express {
     interface Request {
-      userId?: number;
+      userId?: string;
     }
   }
 }
@@ -34,7 +34,7 @@ export const authMiddleware = async (
     const secret = process.env.JWT_SECRET;
 
     const decoded = jwt.verify(token as string, secret as string) as {
-      id: number;
+      id: string;
     };
 
     const userId = decoded.id;

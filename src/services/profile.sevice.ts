@@ -33,7 +33,7 @@ export const getAllRandomProfileService = async (): Promise<any> => {
 
 //service para buscar um perfil pelo id do usuario
 export const getProfileByIdService = async (
-  profileId: number
+  profileId: string
 ): Promise<any> => {
   const profile = await prisma.profileCv.findUnique({
     where: { id: profileId },

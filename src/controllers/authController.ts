@@ -15,16 +15,15 @@ export const githubAuthController = async (
   try {
     const user = await githubAuthService(code);
 
-    const userId = user.id;
-
-    const token = generateToken(userId);
+    const token = generateToken(user.id);
 
     res.status(200).json({ message: "Logado com Sucesso!", token, user });
 
     return;
   } catch (error) {
     console.error("Erro na autenticação com GitHub:", error);
-    res.status(500).json({ error: "Erro na autenticação com o GitHub." });
+    res.status(500).json({ error });
+
     return;
   }
 };

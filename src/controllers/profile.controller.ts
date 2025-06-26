@@ -95,7 +95,7 @@ export const getProfileById = async (req: Request, res: Response) => {
   }
 
   try {
-    const profile = await getProfileByIdService(Number(profileId));
+    const profile = await getProfileByIdService(profileId);
 
     if (!profile) {
       res.status(404).json({ message: "Perfil não encontrado." });

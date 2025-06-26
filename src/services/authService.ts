@@ -6,7 +6,6 @@ const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
 
 export const githubAuthService = async (code: string) => {
-  // 1. Trocar código pelo token de acesso
   const tokenResponse = await axios.post(
     "https://github.com/login/oauth/access_token",
     {
@@ -23,7 +22,6 @@ export const githubAuthService = async (code: string) => {
 
   const accessToken = tokenResponse.data.access_token;
 
-  // 2. Buscar dados do usuário autenticado
   const userResponse = await axios.get("https://api.github.com/user", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -32,27 +30,29 @@ export const githubAuthService = async (code: string) => {
 
   const githubData = userResponse.data;
 
-  // 3. Criar ou atualizar usuário no banco de dados
-  const user = await prisma.user.upsert({
-    where: { githubId: githubData.id },
-    update: {
-      login: githubData.login,
-      name: githubData.name,
-      avatarUrl: githubData.avatar_url,
-    },
-    create: {
-      githubId: githubData.id,
-      login: githubData.login,
-      name: githubData.name,
-      avatarUrl: githubData.avatar_url,
-    },
+  if (!githubData.login || !githubData.avatar_url) {
+    throw new Error("Dados incompletos do GitHub.");
+  }
+
+  let user = await prisma.user.findUnique({
+    where: { login: githubData.login },
   });
+
+  if (!user) {
+    user = await prisma.user.create({
+      data: {
+        login: githubData.login,
+        name: githubData.name ?? githubData.login,
+        avatarUrl: githubData.avatar_url,
+      },
+    });
+  }
 
   return user;
 };
 
 //service para gerar token jwt com id do usuario
-export const generateToken = (id: number) => {
+export const generateToken = (id: string) => {
   return jwt.sign({ id }, process.env.JWT_SECRET as string, {
     expiresIn: "1d",
   });
