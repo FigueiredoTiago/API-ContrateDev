@@ -54,6 +54,6 @@ export const githubAuthService = async (code: string) => {
 //service para gerar token jwt com id do usuario
 export const generateToken = (id: string) => {
   return jwt.sign({ id }, process.env.JWT_SECRET as string, {
-    expiresIn: "1d",
+    expiresIn: "15m",
   });
 };
