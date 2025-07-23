@@ -3,6 +3,7 @@ import {
   createProfileService,
   getAllRandomProfileService,
   getProfileByIdService,
+  getProfileByUserIdService,
 } from "../services/profile.sevice";
 
 export const createProfile = async (
@@ -90,7 +91,7 @@ export const getAllRandomProfile = async (
   }
 };
 
-//controle para buscar um perfil pelo id do perfil
+//controle para buscar um perfil pelo id do perfil(profile)
 
 export const getProfileById = async (req: Request, res: Response) => {
   const profileId = req.params.id;
@@ -105,6 +106,31 @@ export const getProfileById = async (req: Request, res: Response) => {
 
     if (!profile) {
       res.status(404).json({ message: "Perfil não encontrado." });
+      return;
+    }
+
+    res.status(200).json(profile);
+  } catch (error) {
+    res.status(500).json({ message: "Error ao Buscar perfil." });
+    return;
+  }
+};
+
+// pega um perfil usando o ID do UserID em si:
+
+export const getProfileByUserId = async (req: Request, res: Response) => {
+  const userId = req.params.userId;
+
+  if (!userId) {
+    res.status(400).json({ error: "ID inválido!" });
+    return;
+  }
+
+  try {
+    const profile = await getProfileByUserIdService(userId);
+
+    if (!profile) {
+      res.status(404).json({ message: "Perfil não criado ainda..." });
       return;
     }
 

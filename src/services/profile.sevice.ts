@@ -31,7 +31,7 @@ export const getAllRandomProfileService = async (): Promise<any> => {
   return randomProfiles;
 };
 
-//service para buscar um perfil pelo id do usuario
+//service para buscar um perfil pelo id do profile do usuario
 export const getProfileByIdService = async (
   profileId: string
 ): Promise<any> => {
@@ -40,4 +40,15 @@ export const getProfileByIdService = async (
   });
 
   return profile;
+};
+
+// service para buscar o perfil por userId
+export const getProfileByUserIdService = async (
+  userId: string
+): Promise<any | null> => {
+  const profile = await prisma.profileCv.findFirst({
+    where: { userId },
+  });
+
+  return profile || null;
 };
