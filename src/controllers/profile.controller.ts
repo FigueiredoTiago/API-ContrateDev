@@ -83,11 +83,11 @@ export const getAllRandomProfile = async (
   try {
     const profiles = await getAllRandomProfileService();
     if (profiles.length === 0) {
-      return res.status(404).json({ message: "Nenhum perfil encontrado." });
+      return res.status(404).json({ message: "Nenhum perfil encontrado ou cadastrado!" });
     }
     return res.status(200).json(profiles);
   } catch (error) {
-    res.status(500).json({ message: "Error ao Buscar perfis." });
+    res.status(500).json({ message: "Error ao Buscar perfis."});
   }
 };
 
